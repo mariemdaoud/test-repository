@@ -1,0 +1,30 @@
+version: "3.8"
+services:
+  nsp_test_backend:
+    container_name: nsp_test_backend # Nom de serveur du backend
+    image: nsp_test_backend:0.0.1
+    build:
+      context: .
+    ports:
+      - "3001:3001"
+    environment:
+      - EXTERNAL_PORT=3001 # Port
+      - PGUSER=admin # User du base 
+      - PGPASSWORD=admin # Password du base
+      - PGDATABASE=nsp_test_database # Nom du base de donnée
+      - PGHOST=nsp_test_db # Nom du service de base donnée
+    depends_on:
+      - nsp_test_db
+  nsp_test_db:
+    container_name: nsp_test_db # Nom de serveur du base donnée
+    image: "postgres:11" # Image contient postgres version 11
+    ports:
+      - "5432:5432" # Port du postgres
+    environment:
+      - POSTGRES_USER=admin # User du base 
+      - POSTGRES_PASSWORD=admin # Password du base
+      - POSTGRES_DB=nsp_test_database # Nom du base de donnée
+    volumes:
+      - nps_test_data:/var/lib/postgresql/data
+volumes:
+  nps_test_data: {}
