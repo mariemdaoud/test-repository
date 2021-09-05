@@ -76,7 +76,7 @@ exports.deleteVideoByTag = async (req, res) => {
             allVideos.push( {videoID : VideosTag.videoID} );    
         });
 
-        allVideos.forEach(video => {
+        allVideos.forEach(video => {y
             Video.destroy({ where: { videoID: video.videoID } });
         });
 

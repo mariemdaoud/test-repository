@@ -2,7 +2,7 @@ const controller = require('../controllers/favoris');
 const router = require('express').Router();
 
 router
-    .get('/', controller.findFavorisByUser)
+    .get('/:id', controller.findFavorisByUser)
     .post('/', controller.addFavorisByUser);
 
 

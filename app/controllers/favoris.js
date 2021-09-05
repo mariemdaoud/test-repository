@@ -2,15 +2,7 @@ const User = require("../models/users");
 const Favoris = require("../models/favoris");
 
 // Méthode add favoris video by user 
-exports.addFavorisByUser = async(req, res) => {
-
-        // const v = await Favoris.findAll({
-        //     include: [{
-        //     model: User,
-        //     // as: 'users'
-        //     }],
-        // })
-   
+exports.addFavorisByUser = async(req, res) => {   
     try {
         const FAVORISVIDEO_MODEL = {
             userID: req.body.userID,
@@ -33,15 +25,17 @@ exports.addFavorisByUser = async(req, res) => {
 // Méthode find favoris by user
 exports.findFavorisByUser = async(req, res) => {
     try {
-        const v = await Favoris.findAll({
+        // find list des videos by tag
+        const  userID  = req.params.id;
+        const fav = await Favoris.findAll({
             include: [{
             model: User,
-            // as: 'users'
+            where: { id: userID }
             }],
         })
       
-        console.log("OK get All favoris by favoris: ", v.map(el => el.dataValues));
-        return res.status(200).json(v);
+        console.log("OK get All favoris by favoris: ", fav.map(el => el.dataValues));
+        return res.status(200).json(fav);
     } catch (error) {
         console.log('ERROR in get All favoris by user:', error);
         return res.status(500).json(error);

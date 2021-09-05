@@ -231,15 +231,6 @@
 			"request": {
 				"method": "DELETE",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
 					"raw": "http://localhost:3001/users/username",
 					"protocol": "http",
@@ -586,15 +577,6 @@
 			"request": {
 				"method": "DELETE",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
 					"raw": "http://localhost:3001/videos/VID002",
 					"protocol": "http",
@@ -851,15 +833,6 @@
 			"request": {
 				"method": "DELETE",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
 					"raw": "http://localhost:3001/tags/TAG004",
 					"protocol": "http",
@@ -1051,30 +1024,19 @@
 		},
 		{
 			"name": "GET: all favoris",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"videoID\": \"VID003\",\r\n    \"nom\": \"Java/JEE\",\r\n    \"description\": \"La vidéo du cours Java/JEE\",\r\n    \"url\": \"http://Java/JEE\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
-					"raw": "http://localhost:3001/favoris",
+					"raw": "http://localhost:3001/favoris/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3001",
 					"path": [
-						"favoris"
+						"favoris",
+						"1"
 					]
 				}
 			},
