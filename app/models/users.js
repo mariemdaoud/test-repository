@@ -1,6 +1,5 @@
 const Sequelize = require('sequelize');
 const db = require('../util/database');
-const favoris = require('./favoris');
 
 // Définir table USERS
 const User = db.define('users', {
@@ -24,7 +23,5 @@ const User = db.define('users', {
 		allowNull: false
 	}
 });
-
-User.hasMany(favoris, {as: 'favoris', foreignKey: 'id'});
 
 module.exports = User;

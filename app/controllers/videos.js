@@ -52,9 +52,6 @@ exports.getAllVideos = async (req, res, next) => {
                     content: videosWithCount.rows,
                     totalPages: Math.ceil(videosWithCount.count / Number.parseInt(size))
                });
-        // console.log("OK get All Videos: ", ALL.map(el => el.dataValues));
-        // const ALL = await Video.findAll();
-        // return res.status(200).json(ALL);
     } catch (error) {
         console.log('ERROR in get All Videos:', error);
         return res.status(500).json(error);

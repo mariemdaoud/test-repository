@@ -6,7 +6,7 @@ const router = require('express').Router();
 router
   .get('/', controller.getAllUsers)
   .get('/:id', controller.getUser)
-  .put('/:id', controller.updateUser)
+  .put('/:username', controller.updateUser)
   .delete('/:id', controller.deleteUser)
 
 module.exports = router;

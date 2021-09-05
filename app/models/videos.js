@@ -22,6 +22,4 @@ const Video = db.define('videos', {
 	}
 });
 
-Video.hasMany(favoris, {as: 'favoris', foreignKey: 'videoID'});
-
 module.exports = Video;

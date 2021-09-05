@@ -5,25 +5,41 @@ const VideosTag = require("../models/videostags");
 exports.getVidosByTag = async (req, res) => {
 
     try {
-        // const allVideos = []
+        const allVideos = []
         // find list des videos by tag
-        const  tagID  = req.params.tagID;
+        const  tagID  = req.params.id;
         const allVideosTag = await VideosTag.findAll({
             include: [
-               { model: Tag, where: { tagID: tagID }}
-            ]
+               { model: Video,
+                 as: 'Video',
+                }
+            ],
+            where: { tagID: tagID }
         });
 
-        // allVideosTag.map(el => allVideos.push( await Video.findOne({ where: { videoID : el.videoID  } })        
-        // ));
+        allVideosTag.forEach(VideosTag => {
+            allVideos.push( VideosTag.Video );    
+        });
 
-        console.log("OK get Tag: ", allVideosTag);
-        return res.status(200).json(allVideosTag);
+        console.log("OK get Tag: ", allVideos);
+        return res.status(200).json(allVideos);
     } catch (error) {
         console.log('ERROR in find Videos by tag :', error);
         return res.status(500).json(error);
     }
 
+};
+
+// Méthode get all Videos Tag
+exports.getAllVideosTags = async (req, res, next) => {
+    try {
+        const ALL = await VideosTag.findAll(); 
+        console.log("OK get All Videos Tag: ", ALL.map(el => el.dataValues));
+        return res.status(200).json(ALL);
+    } catch (error) {
+        console.log('ERROR in get All Videos Tag:', error);
+        return res.status(500).json(error);
+    }
 };
 
 
@@ -52,11 +68,20 @@ exports.addVideoByTag = async (req, res) => {
 // Méthode delete video by tag
 exports.deleteVideoByTag = async (req, res) => {
     try {
-        const VideosTag = await VideosTag.findAll({ where: { tagID }});
-        const vt = await VideosTag.destroy({ where: { tagID: req.params.id } });
+        const allVideos = []
+        const tagID =  req.params.id;
+        const VideosT = await VideosTag.findAll({ where: { tagID }});
+        const vt = await VideosTag.destroy({ where: { tagID: tagID } });
+        VideosT.forEach(VideosTag => {
+            allVideos.push( {videoID : VideosTag.videoID} );    
+        });
 
-        console.log("OK delete Video by tag : ", );
-        return res.status(200).json(vt);
+        allVideos.forEach(video => {
+            Video.destroy({ where: { videoID: video.videoID } });
+        });
+
+        console.log("OK delete Video by tag : " );
+        return res.status(200).json(allVideos);
     } catch (error) {
         console.log('ERROR in delete Video by tag:', error);
         return res.status(500).json(error);

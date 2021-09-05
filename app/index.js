@@ -6,6 +6,7 @@ const User = require('./models/users');
 const Video = require('./models/videos');
 const Tag = require('./models/tags');
 const VideoTag = require('./models/videostags');
+const Favoris = require('./models/favoris');
 
 // Initialiser l'Application avec express
 const app = express();
@@ -26,6 +27,7 @@ app.use('/users', require('./routes/users')); // users crud
 app.use('/videos', require('./routes/videos')); // videos crud
 app.use('/tags', require('./routes/tags')); // tags crud
 app.use('/videoByTag', require('./routes/videostags')); // videoByTag method 
+app.use('/favoris', require('./routes/favoris')); // favoris method 
 app.use('/register', require('./routes/register')); // register
 app.use('/login', require('./routes/login')); // login
 app.use('/logout', require('./routes/logout')); // logout 

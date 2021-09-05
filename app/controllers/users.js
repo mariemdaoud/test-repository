@@ -38,7 +38,7 @@ exports.updateUser = async (req, res, next) => {
         }
 
         try {
-            const u = await User.update(USER_MODEL, { where: { id: req.params.id } });
+            const u = await User.update(USER_MODEL, { where: { username: req.params.username } });
             console.log("OK update User : ", u);
             return res.status(200).json(u);
         } catch (error) {

@@ -1,27 +1,23 @@
 const Sequelize = require('sequelize');
 const db = require('../util/database');
-const favoris = require('./favoris');
 const User = require('./users');
 const Video = require('./videos')
 
-const Favoris = db.define('VideosTags', {
-    id: {
+// Définir table favoris
+const Favoris = db.define('favoris', {
+    favorisId: {
 		type: Sequelize.INTEGER,
 		autoIncrement: true,
 		allowNull: false,
 		primaryKey: true
 	},
     date: {
-        // primaryKey: true,
         type: Sequelize.DATE,
-        references: {
-            model: Video,
-            key: "videoID"
-        }
+        defaultValue: Sequelize.NOW 
     }
 });
 
-Favoris.belongsTo(User, { foreignKey: 'id' });
+Favoris.belongsTo(User, { foreignKey: 'userID' });
 Favoris.belongsTo(Video, { foreignKey: 'videoID' });
 
 module.exports = Favoris;
